@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RED_SOCIALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="CORREO" Type="varchar" MaxLength="50" />
+          <Property Name="CONTRASENIA" Type="varchar" MaxLength="50" />
+          <Property Name="ID_ROL" Type="int" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROL_NAME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__PERSONA__ID_ROL__4BAC3F29">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AGREGAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="CORREO" Type="varchar" Mode="In" />
+          <Parameter Name="CONTRASENIA" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AUTENTICAR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CORREO" Type="varchar" Mode="In" />
+          <Parameter Name="CONTRA" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="RED_SOCIALModelStoreContainer">
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PERSONA__ID_ROL__4BAC3F29" Association="Self.FK__PERSONA__ID_ROL__4BAC3F29">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RED_SOCIALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTRASENIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ROL" Type="Int32" />
+          <NavigationProperty Name="ROL" Relationship="Self.FK__PERSONA__ID_ROL__4BAC3F29" FromRole="PERSONA" ToRole="ROL" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROL_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.FK__PERSONA__ID_ROL__4BAC3F29" FromRole="ROL" ToRole="PERSONA" />
+        </EntityType>
+        <Association Name="FK__PERSONA__ID_ROL__4BAC3F29">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RED_SOCIALEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" />
+          <AssociationSet Name="FK__PERSONA__ID_ROL__4BAC3F29" Association="Self.FK__PERSONA__ID_ROL__4BAC3F29">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <FunctionImport Name="AGREGAR_USUARIO">
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="CORREO" Mode="In" Type="String" />
+            <Parameter Name="CONTRASENIA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AUTENTICAR" EntitySet="PERSONA" ReturnType="Collection(RED_SOCIALModel.PERSONA)">
+            <Parameter Name="CORREO" Mode="In" Type="String" />
+            <Parameter Name="CONTRA" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="AUTENTICAR_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CORREO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CONTRASENIA" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ID_ROL" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RED_SOCIALModelStoreContainer" CdmEntityContainer="RED_SOCIALEntities">
+          <EntitySetMapping Name="PERSONA">
+            <EntityTypeMapping TypeName="RED_SOCIALModel.PERSONA">
+              <MappingFragment StoreEntitySet="PERSONA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="CONTRASENIA" ColumnName="CONTRASENIA" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="RED_SOCIALModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ROL_NAME" ColumnName="ROL_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AGREGAR_USUARIO" FunctionName="RED_SOCIALModel.Store.AGREGAR_USUARIO" />
+          <FunctionImportMapping FunctionImportName="AUTENTICAR" FunctionName="RED_SOCIALModel.Store.AUTENTICAR">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

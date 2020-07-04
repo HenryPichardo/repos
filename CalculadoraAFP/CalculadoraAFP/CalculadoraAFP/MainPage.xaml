@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Visual="Material"
+             x:Class="CalculadoraAFP.MainPage"
+             BackgroundImageSource="fondo.png">
+
+    <StackLayout
+        WidthRequest="275"
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        >
+        <!-- Place new controls here -->
+        <Image Source="afp30.jpg"
+               Margin="-3"
+               HeightRequest="110"/>
+        <Image Source="dinero.png"
+               HeightRequest="155"
+               Margin="-3"
+               />
+        <Label Text="CALCULA TU 30% AFP"
+               TextColor="Black"
+               HorizontalTextAlignment="Center"
+               FontAttributes="Bold"
+               FontSize="25"/>
+        <Entry Placeholder="Introduzca aquí su acumulado"
+               Keyboard="Numeric"
+               
+               x:Name="Acumulado"
+               Focused="Acumulado_Focused"/>
+        <Button Clicked="Button_Clicked"
+            BackgroundColor="#155FC1"
+                HeightRequest="50"
+                Margin="20"
+                
+                BorderWidth="3"
+                BorderColor="#FFFFFF"
+            CornerRadius="25"                
+                Text="CALCULAR"
+                TextColor="White"
+                CharacterSpacing="2"/>
+        <Entry Placeholder="Resultado"
+               IsReadOnly="True"
+               
+               x:Name="Resultado"/>
+
+
+        <Label HorizontalTextAlignment="Center"
+            Text="Si no sabes cual es tu acumulado, Consulta tu AFP, click aquí."
+               TextDecorations="Underline"
+               TextColor="DarkBlue"
+               x:Name="link"               
+               Margin="20"
+               FontAttributes="Italic" 
+               FontSize="16"
+              >
+            <Label.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Label.GestureRecognizers>
+               </Label>
+    </StackLayout>
+
+</ContentPage>

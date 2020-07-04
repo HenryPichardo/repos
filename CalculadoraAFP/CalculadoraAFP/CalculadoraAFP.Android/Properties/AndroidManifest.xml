@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="Alpha 1.0" package="com.pichar2.calculadoraafp" android:installLocation="preferExternal">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+	<application android:label="CalculadoraAFP30%" android:icon="@drawable/dinero"></application>
+</manifest>

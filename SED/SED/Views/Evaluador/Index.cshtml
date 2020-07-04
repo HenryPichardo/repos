@@ -1,0 +1,36 @@
+﻿@model List<SED.Models.EvaluadorBLL>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/SED.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @Html.ActionLink("Agregar", "Agregar", null, new { @class = "btn btn-primary"})
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>IdEvaluador</td>
+                <td>TipoEvaluador</td>
+                <td>CorreUniversitario</td>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id_Evaluador</td>
+                    <td>@item.TipoEvaluador</td>
+                    <td>@item.CorreoUniversitario</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

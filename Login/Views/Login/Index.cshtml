@@ -1,0 +1,18 @@
+﻿@model Login.Models.Usuario
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(o => o.Login)
+    @Html.TextBoxFor(o => o.Login)
+    @Html.ValidationMessageFor(o => o.Login)
+    <br />
+    @Html.LabelFor(o => o.Password)
+    @Html.TextBoxFor(o => o.Password)
+    @Html.ValidationMessageFor(o => o.Password)
+    <br />
+    <input type="submit" value="Enviar" />
+}
